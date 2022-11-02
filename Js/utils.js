@@ -1,9 +1,9 @@
-function Goal(ball, player) {
+function Goal(ball, player, enemy) {
   ball.reset();
   ball.velocity.x = 0;
   // reset paddle speed
-  paddle1.reset();
-  paddle2.reset();
+  player.reset();
+  enemy.reset();
 
   player.GoalAnim.display = true;
   player.GoalSound.play();
@@ -16,7 +16,9 @@ function Goal(ball, player) {
     if (gameState === "On") {
       player.GoalSound.pause();
       player.GoalSound.currentTime = 0;
-      player === paddle1 ? (ball.velocity.x = 5) : (ball.velocity.x = -5);
+      player.position.x < enemy.position.x
+        ? (ball.velocity.x = 5)
+        : (ball.velocity.x = -5);
     }
   }, 3000);
 }

@@ -10,8 +10,8 @@
 const canvas = document.querySelector("#Game");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 10240;
-canvas.height = 5760;
+canvas.width = 1024;
+canvas.height = 576;
 
 console.log(canvas.width);
 console.log(canvas.height);
@@ -117,10 +117,10 @@ const keys = {
     message.style.display = "none";
   }
 
-  background.update();
-  paddle1.update();
-  paddle2.update();
-  ballon.update();
+  background.update(ctx);
+  paddle1.update(ctx);
+  paddle2.update(ctx);
+  ballon.update(paddle1, paddle2, ctx);
   if (paddle1.GoalAnim.display === true) paddle1.GoalAnim.update();
   if (paddle2.GoalAnim.display === true) paddle2.GoalAnim.update();
 

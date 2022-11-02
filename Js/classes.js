@@ -37,7 +37,7 @@ class Sprite {
     };
   }
 
-  draw() {
+  draw(ctx) {
     ctx.drawImage(
       this.image,
       this.framesCurrent * (this.image.width / this.framesMax),
@@ -76,7 +76,7 @@ class Sprite {
 
   update() {
     // this.getCoord(); maybe i need this
-    this.draw();
+    this.draw(ctx);
     this.animateFrames();
   }
 }
@@ -127,8 +127,8 @@ class paddle extends Sprite {
     });
     // this.GoalAnim.imageSrc = GoalAnimSrc;
   }
-  update() {
-    this.draw();
+  update(ctx) {
+    this.draw(ctx);
     // movement paddle
     if (
       !(this.position.y + this.velocity.y + this.height > canvas.height) &&
@@ -191,8 +191,8 @@ class ball extends Sprite {
     this.velocity.y = 0;
   }
 
-  update() {
-    this.draw();
+  update(paddle1, paddle2, ctx) {
+    this.draw(ctx);
     if (this.velocity.x !== 0 || this.velocity.y !== 0) this.animateFrames();
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
@@ -224,13 +224,13 @@ class ball extends Sprite {
       if (gameState === "On") {
         score_2++;
         document.querySelector("#score_2").innerHTML = score_2;
-        Goal(this, paddle2);
+        Goal(this, paddle2, paddle1);
       }
     } else if (ballon.coord.right >= background.coord.right) {
       if (gameState === "On") {
         score_1++;
         document.querySelector("#score_1").innerHTML = score_1;
-        Goal(this, paddle1);
+        Goal(this, paddle1, paddle2);
       }
     }
   }
